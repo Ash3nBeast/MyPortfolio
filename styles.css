@@ -48,6 +48,7 @@ body {
   line-height: 1.6;
   position: relative;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   transition: background 0.4s ease, color 0.4s ease;
 }
 
@@ -2046,7 +2047,7 @@ body.light-mode .form-group textarea:focus {
     align-items: flex-start;
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: min(300px, 80vw);
     height: 100dvh;
     padding: 5rem 2rem 2rem;
@@ -2056,8 +2057,13 @@ body.light-mode .form-group textarea:focus {
     border-left: 1px solid rgba(0, 245, 255, 0.2);
     gap: 1.6rem;
     z-index: 200;
-    transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.35s;
     font-size: 1.05rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   body.light-mode .main-nav {
@@ -2066,7 +2072,8 @@ body.light-mode .form-group textarea:focus {
   }
 
   .main-nav.nav-open {
-    right: 0;
+    transform: translateX(0);
+    visibility: visible;
   }
 
   .theme-toggle {
