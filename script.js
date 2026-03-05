@@ -6,24 +6,33 @@ document.addEventListener("DOMContentLoaded", () =>
 
   // ─── Theme Toggle ──────────────────────────────────────────
   const themeToggle = document.getElementById("theme-toggle");
-  const themeIcon = themeToggle?.querySelector(".theme-icon");
   const body = document.body;
 
   const savedTheme = localStorage.getItem("theme") || "dark";
   if (savedTheme === "light")
   {
     body.classList.add("light-mode");
-    if (themeIcon) themeIcon.textContent = "☀️";
   }
 
   if (themeToggle)
   {
     themeToggle.addEventListener("click", () =>
     {
+      // Trigger pulse animation
+      themeToggle.classList.remove("toggling");
+      // Force reflow so the animation restarts
+      void themeToggle.offsetWidth;
+      themeToggle.classList.add("toggling");
+
       body.classList.toggle("light-mode");
       const isLight = body.classList.contains("light-mode");
       localStorage.setItem("theme", isLight ? "light" : "dark");
-      if (themeIcon) themeIcon.textContent = isLight ? "☀️" : "🌙";
+    });
+
+    // Clean up animation class when it ends
+    themeToggle.addEventListener("animationend", () =>
+    {
+      themeToggle.classList.remove("toggling");
     });
   }
 

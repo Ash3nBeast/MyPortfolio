@@ -252,13 +252,80 @@ body.light-mode .theme-toggle:hover {
   background: radial-gradient(circle at top, rgba(0, 122, 204, 0.12), rgba(248, 250, 252, 0.8));
 }
 
+/* ── Theme Icon Spin-Swap Animation ──────────────────── */
 .theme-icon {
-  display: block;
-  transition: transform 0.3s ease;
+  position: absolute;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--accent-secondary);
+  transition:
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.theme-toggle:hover .theme-icon {
-  transform: rotate(15deg);
+.theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark mode default: moon visible, sun hidden */
+.theme-icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-icon--sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Light mode: sun visible, moon hidden */
+body.light-mode .theme-icon--moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+body.light-mode .theme-icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Hover wiggle on whichever icon is currently visible */
+.theme-toggle:hover .theme-icon--moon {
+  transform: rotate(-15deg) scale(1);
+}
+
+body.light-mode .theme-toggle:hover .theme-icon--sun {
+  transform: rotate(15deg) scale(1);
+}
+
+/* Click flash ring */
+.theme-toggle.toggling {
+  animation: toggle-pulse 0.45s ease-out;
+}
+
+@keyframes toggle-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 245, 255, 0);
+  }
+}
+
+body.light-mode .theme-toggle.toggling {
+  animation-name: toggle-pulse-light;
+}
+
+@keyframes toggle-pulse-light {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 122, 204, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 122, 204, 0);
+  }
 }
 
 .nav-cta {
@@ -1225,46 +1292,74 @@ body.light-mode .section-mission {
 .timeline {
   max-width: 860px;
   margin: 0 auto;
-  border-left: 2px dashed rgba(0, 255, 255, 0.4);
-  padding-left: 1.8rem;
+  /* badge-size: 2.4rem  →  badge center at 1.2rem */
+  padding-left: 3.4rem;
+  /* badge (2.4rem) + gap (1rem) to content */
   position: relative;
 }
 
+/* Dashed line running through badge centers */
 .timeline::before {
   content: "";
   position: absolute;
-  left: -3px;
+  /* 1.2rem = half of 2.4rem badge → exact center */
+  left: 1.2rem;
+  transform: translateX(-50%);
   top: 0;
   bottom: 0;
+  width: 0;
+  border-left: 2px dashed rgba(0, 255, 255, 0.4);
+  z-index: 0;
+}
+
+/* Glowing overlay on the line */
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
   background: linear-gradient(to bottom,
       rgba(0, 255, 255, 0),
       rgba(0, 255, 255, 0.8),
       rgba(0, 255, 255, 0));
-  width: 2px;
   opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .timeline-item {
   position: relative;
+  z-index: 1;
+  /* ensures badge + content stack above the ::before/::after line */
   margin-bottom: 2.2rem;
 }
 
 .timeline-badge {
   position: absolute;
-  left: -3.3rem;
-  top: 0.1rem;
-  width: 2.1rem;
-  height: 2.1rem;
+  left: -3.4rem;
+  /* pull back into the padding area: flush left of container */
+  top: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0;
+  padding: 0;
   border-radius: 999px;
   background: #050505;
+  background-clip: padding-box;
   border: 1px solid var(--accent-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Fira Code", "Courier Prime", monospace;
   font-size: 0.75rem;
+  font-weight: 700;
   color: var(--accent-secondary);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  z-index: 2;
+  /* above the line */
 }
 
 .timeline-content {
@@ -1748,11 +1843,16 @@ body.light-mode .site-footer {
   }
 
   .timeline {
-    padding-left: 1.3rem;
+    padding-left: 3rem;
+  }
+
+  .timeline::before,
+  .timeline::after {
+    left: 1.2rem;
   }
 
   .timeline-badge {
-    left: -2.7rem;
+    left: -3rem;
   }
 }
 
