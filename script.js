@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () =>
   }
 
   // ─── Scroll-Reveal Animations ──────────────────────────────
-  const revealEls = document.querySelectorAll(".scroll-reveal, .spec-card, .project-card, .cert-card, .timeline-item, .about-card, .contact-card");
+  const revealEls = document.querySelectorAll(".scroll-reveal, .spec-card, .project-card, .cert-card, .timeline-item, .about-card, .contact-card, .service-card");
 
   const revealObserver = new IntersectionObserver(
     (entries) =>
