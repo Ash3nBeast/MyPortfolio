@@ -1281,194 +1281,6 @@ body.light-mode .skill-tag:hover {
 
 /* Skill category classes - styling handled by .skill-fill */
 
-/* ── Services Section ────────────────────────────────── */
-.section-services {
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(255, 0, 60, 0.08), transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(0, 245, 255, 0.06), transparent 50%),
-    radial-gradient(circle at top right, #181828, #0B0E14 55%);
-}
-
-body.light-mode .section-services {
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(210, 15, 57, 0.04), transparent 50%),
-    radial-gradient(circle at top right, #F1F5F9, #F8FAFC 55%);
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.6rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.service-card {
-  background: rgba(26, 26, 36, 0.8);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(0, 245, 255, 0.12);
-  box-shadow:
-    0 0 24px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  padding: 0 1.6rem 1.6rem;
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s ease;
-}
-
-/* Gradient accent bar at top of card */
-.service-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #FF003C, #6600cc, #00F5FF);
-  opacity: 0.7;
-  transition: opacity 0.35s ease, height 0.35s ease;
-}
-
-/* Ambient glow on hover */
-.service-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 0%, rgba(0, 245, 255, 0.08), transparent 60%),
-    radial-gradient(ellipse at 70% 100%, rgba(255, 0, 60, 0.05), transparent 60%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 245, 255, 0.35);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(0, 245, 255, 0.2),
-    0 0 60px rgba(255, 0, 60, 0.08);
-}
-
-.service-card:hover::before {
-  opacity: 1;
-  height: 4px;
-}
-
-.service-card:hover::after {
-  opacity: 1;
-}
-
-body.light-mode .service-card {
-  background: #FFFFFF;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
-}
-
-body.light-mode .service-card::before {
-  background: linear-gradient(90deg, #d20f39, #7c3aed, #1e66f5);
-  opacity: 0.5;
-}
-
-body.light-mode .service-card::after {
-  display: none;
-}
-
-body.light-mode .service-card:hover {
-  border-color: rgba(30, 102, 245, 0.4);
-  box-shadow: 0 8px 36px rgba(0, 122, 204, 0.14);
-}
-
-body.light-mode .service-card:hover::before {
-  opacity: 0.9;
-}
-
-/* Icon with glowing circle background */
-.service-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.2rem;
-  height: 3.2rem;
-  margin: -0.4rem 0 1rem -0.1rem;
-  /* overlap the top accent bar slightly */
-  margin-top: 1.4rem;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  background: rgba(0, 245, 255, 0.06);
-  border: 1px solid rgba(0, 245, 255, 0.15);
-  box-shadow: 0 0 16px rgba(0, 245, 255, 0.12);
-  position: relative;
-  z-index: 1;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease,
-    border-color 0.35s ease,
-    background 0.35s ease;
-}
-
-.service-card:hover .service-icon {
-  transform: scale(1.1) rotate(-3deg);
-  background: rgba(255, 0, 60, 0.08);
-  border-color: rgba(255, 0, 60, 0.3);
-  box-shadow:
-    0 0 20px rgba(255, 0, 60, 0.25),
-    0 0 40px rgba(0, 245, 255, 0.1);
-}
-
-body.light-mode .service-icon {
-  background: rgba(30, 102, 245, 0.06);
-  border-color: rgba(30, 102, 245, 0.15);
-  box-shadow: 0 0 12px rgba(30, 102, 245, 0.08);
-}
-
-body.light-mode .service-card:hover .service-icon {
-  background: rgba(210, 15, 57, 0.06);
-  border-color: rgba(210, 15, 57, 0.25);
-  box-shadow: 0 0 16px rgba(210, 15, 57, 0.12);
-}
-
-.service-card h3 {
-  margin: 0 0 0.6rem;
-  font-family: "Fira Code", "Courier Prime", monospace;
-  font-size: 0.95rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  position: relative;
-  z-index: 1;
-}
-
-.service-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  position: relative;
-  z-index: 1;
-}
-
-/* Stagger service cards reveal */
-.services-grid .service-card:nth-child(2) {
-  transition-delay: 0.08s;
-}
-
-.services-grid .service-card:nth-child(3) {
-  transition-delay: 0.16s;
-}
-
-.services-grid .service-card:nth-child(4) {
-  transition-delay: 0.24s;
-}
-
 .section-mission {
   background: radial-gradient(circle at top, #1a1a28, #0B0E14 55%);
 }
@@ -1788,8 +1600,10 @@ body.light-mode .section-contact {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .contact-card {
@@ -2004,10 +1818,6 @@ body.light-mode .site-footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .contact-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2029,7 +1839,6 @@ body.light-mode .site-footer {
 
   .specs-grid,
   .projects-grid,
-  .services-grid,
   .contact-grid,
   .certifications-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -2107,8 +1916,7 @@ body.light-mode .hero-photo {
 .cert-card,
 .timeline-item,
 .about-card,
-.contact-card,
-.service-card {
+.contact-card {
   opacity: 0;
   transform: translateY(28px);
   transition:
@@ -2122,8 +1930,7 @@ body.light-mode .hero-photo {
 .cert-card.revealed,
 .timeline-item.revealed,
 .about-card.revealed,
-.contact-card.revealed,
-.service-card.revealed {
+.contact-card.revealed {
   opacity: 1;
   transform: translateY(0);
 }
